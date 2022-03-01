@@ -4,7 +4,9 @@ import logo from "../../assets/icon.png"
 
 const Navbar = () => {
   return (
-    <Container className='flex w-full m-auto bg-blue h-16 items-center'>
+    <Container 
+      fluid
+      className='flex w-full bg-blue h-16 items-center'>
       <Image 
         className='w-12'
         src={logo}

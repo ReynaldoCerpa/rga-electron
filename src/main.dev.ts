@@ -15,6 +15,7 @@ import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+import { screen } from "electron"
 
 export default class AppUpdater {
   constructor() {
@@ -67,16 +68,18 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
+const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: width,
+    height: height,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
     },
   });
 
+  mainWindow.maximize()
   mainWindow.setMenuBarVisibility(false)
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
