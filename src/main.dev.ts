@@ -68,18 +68,16 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
-const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   mainWindow = new BrowserWindow({
     show: false,
-    width: width,
-    height: height,
+    width: 1024,
+    height: 758,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
     },
   });
 
-  mainWindow.maximize()
   mainWindow.setMenuBarVisibility(false)
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 

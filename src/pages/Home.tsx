@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import { Container, Input, Text, Button } from '@mantine/core';
 import { useState } from "react"
 import { checkTime } from '../utils/checktime';
+import { os } from '../utils/computer';
 
 const Home: React.FC = () => {
   const regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -79,6 +80,12 @@ const Home: React.FC = () => {
             className='bg-blue'
             size='md' 
             type='submit'
+            onClick={() => {
+              console.log(os.networkInterfaces().wlp1s0f0u2[1].mac)
+              console.log(os.userInfo().username);
+              console.log(os.hostname())
+              
+            }}
           >
             Checar
           </Button>
