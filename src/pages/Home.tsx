@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import Navbar from '../components/Navbar';
-import { Container, Input, Text, Button } from '@mantine/core';
+import { Container, Input, Text, Button, Transition } from '@mantine/core';
 import { useState } from "react"
 import { checkTime } from '../utils/checktime';
 import { os } from '../utils/computer';
@@ -111,12 +111,17 @@ const Home: React.FC = () => {
             Checar
           </Button>
         </Container>
-        <Alert
-          visible={alert}
-          error={error}
-          title={title}
-          bodymsg={bodymsg}
-        />
+        <Transition mounted={alert} transition="scale-y" duration={100} timingFunction="ease">
+          {(styles)=>(
+            <Alert
+              styles={styles}
+              visible={alert}
+              error={error}
+              title={title}
+              bodymsg={bodymsg}
+            />
+          )}
+        </Transition>
       </Container>
     </Container>
   );
