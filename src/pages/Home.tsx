@@ -4,6 +4,7 @@ import { Container, Input, Text, Button } from '@mantine/core';
 import { useState } from "react"
 import { checkTime } from '../utils/checktime';
 import { os } from '../utils/computer';
+import Alert from '../components/Alert';
 
 const Home: React.FC = () => {
   const regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -15,9 +16,18 @@ const Home: React.FC = () => {
   const [disabled, setDisabled] = useState(false)
   const [loading, setLoading] = useState(false);
 
+  const [title, setTitle] = useState("")
+  const [bodymsg, setBodymsg] = useState("")
+
   const handleInput = ( e : ChangeEvent<HTMLInputElement>) => {
     if (!regex.test(e.target.value) && e.target.value.length < 15 && e.target.value.indexOf(" ") === -1) {
       setId(e.target.value.toUpperCase())
+    }
+  }
+
+  const handleEnter = (e : any) => {
+    if (e.key === "Enter") {
+        handleSubmit(e.target.value)
     }
   }
 
@@ -25,21 +35,28 @@ const Home: React.FC = () => {
     setError(false)
     setAlert(false)
     setLoading(true)
+    setBodymsg("")
+
     if (id === "" || id.length > 20) {
         setError(true)
-        setErrorMsg("Ingrese ID válido")
+        setAlert(true)
+        setTitle("Ingrese ID válido")
         setLoading(false)
     } else {
         setDisabled(true)
         if (!disabled) {
             let msg = await checkTime(id)
+            console.log(msg);
+            
             if (!msg[0]) {
+                setAlert(true)
                 setError(true)
-                setErrorMsg(msg[1])
+                setTitle(msg[1])
                 setLoading(false)
             } else {
+                setTitle("Registrado correctamente")
                 setAlert(true)
-                setAlertMsg(msg[1])
+                setBodymsg(msg[1])
                 setLoading(false)
             }
         }
@@ -75,12 +92,16 @@ const Home: React.FC = () => {
             size='md'
             value={id}
             onInput={handleInput}
+            onKeyDown={handleEnter}
+            disabled={loading}
           />
           <Button
+            loading={loading}
             className='bg-blue'
             size='md' 
             type='submit'
             onClick={() => {
+              handleSubmit(id)
               console.log(os.networkInterfaces().wlp1s0f0u2[1].mac)
               console.log(os.userInfo().username);
               console.log(os.hostname())
@@ -90,6 +111,12 @@ const Home: React.FC = () => {
             Checar
           </Button>
         </Container>
+        <Alert
+          visible={alert}
+          error={error}
+          title={title}
+          bodymsg={bodymsg}
+        />
       </Container>
     </Container>
   );

@@ -6,7 +6,7 @@ export const checkTime = async (id : string) => {
         idGuia: id,
     }
 
-    const response = await fetch(`${process.env.REACT_APP_URL}guides/checkTime`, {
+    const response = await fetch(`http://localhost:8080/guides/checkTime`, {
             method: "post",
             headers: headers,
             body: JSON.stringify(values)
