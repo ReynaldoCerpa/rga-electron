@@ -1,5 +1,5 @@
 import isOnline from "is-online"
 
-(async () => {
-    await isOnline()
-})
+export const online = async () => {
+    return await isOnline()
+}

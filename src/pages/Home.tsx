@@ -46,17 +46,16 @@ const Home: React.FC = () => {
         setDisabled(true)
         if (!disabled) {
             let msg = await checkTime(id)
-            console.log(msg);
             
-            if (!msg[0]) {
+            if (!msg.response) {
                 setAlert(true)
                 setError(true)
-                setTitle(msg[1])
+                setTitle(msg.message)
                 setLoading(false)
             } else {
                 setTitle("Registrado correctamente")
                 setAlert(true)
-                setBodymsg(msg[1])
+                setBodymsg(msg.message)
                 setLoading(false)
             }
         }
@@ -102,10 +101,9 @@ const Home: React.FC = () => {
             type='submit'
             onClick={() => {
               handleSubmit(id)
-              console.log(os.networkInterfaces().wlp1s0f0u2[1].mac)
+/*               console.log(os.networkInterfaces().wlp1s0f0u2[1].mac)
               console.log(os.userInfo().username);
-              console.log(os.hostname())
-              
+              console.log(os.hostname()) */
             }}
           >
             Checar
