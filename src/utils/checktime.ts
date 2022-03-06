@@ -36,13 +36,6 @@ export const checkTime = async (id : string) : Promise<Message> => {
                message = data
            }
         } else {
-            const values = {
-                idGuia: id,
-                mac: systemInfo.mac,
-                username: systemInfo.username,
-                hostname: systemInfo.hostname
-            }
-            console.log(values);
             res = false
             message = "No hay conexión a internet"
         }
@@ -51,6 +44,7 @@ export const checkTime = async (id : string) : Promise<Message> => {
         res = false
         message = "Ocurrió un error"
     }  
+    
     return msg = {
         response : res,
         message : message

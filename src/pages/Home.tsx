@@ -60,6 +60,7 @@ const Home: React.FC = () => {
         }
         setTimeout(() => {
             setDisabled(false) //prevents user spamming ids with timer
+            setLoading(false)
             setId("")
         }, 1000);
         setTimeout(() => {
@@ -94,7 +95,6 @@ const Home: React.FC = () => {
             disabled={loading}
           />
           <Button
-            disabled={loading}
             loading={loading}
             className='bg-blue'
             size='md' 
