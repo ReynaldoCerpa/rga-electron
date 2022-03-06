@@ -10,6 +10,8 @@ export const checkTime = async (id : string) : Promise<Message> => {
         username: systemInfo.username,
         hostname: systemInfo.hostname
     }
+    console.log(values);
+    
 
     let msg : Message;
     let res : boolean;

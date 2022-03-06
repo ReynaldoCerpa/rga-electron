@@ -6,10 +6,17 @@ interface sysInfo {
     hostname: string
 }
 
+let mac = ( os.networkInterfaces()["Wi-Fi"] !== undefined ) ? os.networkInterfaces()["Wi-Fi"][0].mac : os.networkInterfaces().wlp1s0f0u2[1].mac;
+let username = os.userInfo().username;
+let hostname = os.hostname();
+
 export let systemInfo : sysInfo = {
-    mac : os.networkInterfaces().wlp1s0f0u2[1].mac,
-    username : os.userInfo().username,
-    hostname : os.hostname()
+    mac : mac,
+    username : username,
+    hostname : hostname
+    // mac : mac.wlp1s0f0u2[1].mac,
+    // username : username,
+    // hostname : hostname
 }
 
 /*               console.log(os.networkInterfaces().wlp1s0f0u2[1].mac)
