@@ -94,6 +94,7 @@ const Home: React.FC = () => {
             disabled={loading}
           />
           <Button
+            disabled={loading}
             loading={loading}
             className='bg-blue'
             size='md' 

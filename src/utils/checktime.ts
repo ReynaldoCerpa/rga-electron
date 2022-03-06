@@ -4,15 +4,6 @@ import { systemInfo } from "./system/os";
 
 export const checkTime = async (id : string) : Promise<Message> => {
 
-    const values = {
-        idGuia: id,
-        mac: systemInfo.mac,
-        username: systemInfo.username,
-        hostname: systemInfo.hostname
-    }
-    console.log(values);
-    
-
     let msg : Message;
     let res : boolean;
     let message : string;
@@ -20,6 +11,15 @@ export const checkTime = async (id : string) : Promise<Message> => {
     try {
         let isOnline = await online()
         if (isOnline) {
+
+            const values = {
+                idGuia: id,
+                mac: systemInfo.mac,
+                username: systemInfo.username,
+                hostname: systemInfo.hostname
+            }
+            console.log(values);
+            
            const response = await fetch(`http://localhost:8080/guides/checkTime`, {
                    method: "post",
                    headers: headers,
@@ -36,6 +36,13 @@ export const checkTime = async (id : string) : Promise<Message> => {
                message = data
            }
         } else {
+            const values = {
+                idGuia: id,
+                mac: systemInfo.mac,
+                username: systemInfo.username,
+                hostname: systemInfo.hostname
+            }
+            console.log(values);
             res = false
             message = "No hay conexión a internet"
         }
