@@ -1,7 +1,7 @@
 {
-  "name": "erb-tailwind",
-  "productName": "ERB Tailwind",
-  "description": "Electron React Boilerplate with TailwindCSS",
+  "name": "rga-electron",
+  "productName": "Registro guías",
+  "description": "Electron React App built for caracol science museum to check tour guides check-ins and outs",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
     "build:main": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",
