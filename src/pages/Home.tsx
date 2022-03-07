@@ -1,9 +1,10 @@
 import React, { ChangeEvent } from 'react';
 import Navbar from '../components/Navbar';
-import { Container, Input, Text, Button, Transition } from '@mantine/core';
+import { Container, Input, Text, Button } from '@mantine/core';
 import { useState } from "react"
 import { checkTime } from '../utils/checktime';
 import Alert from '../components/Alert';
+import { format } from '../utils/formatAlert';
 
 const Home: React.FC = () => {
   const regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -16,7 +17,8 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const [title, setTitle] = useState("")
-  const [bodymsg, setBodymsg] = useState("")
+  const [bodymsg, setBodymsg] = useState<string[]>([]);
+  const [timer, setTimer] = useState<number>(10000)
 
   const handleInput = ( e : ChangeEvent<HTMLInputElement>) => {
     if (!regex.test(e.target.value) && e.target.value.length < 15 && e.target.value.indexOf(" ") === -1) {
@@ -34,7 +36,7 @@ const Home: React.FC = () => {
     setError(false)
     setAlert(false)
     setLoading(true)
-    setBodymsg("")
+    setBodymsg([])
 
     if (id === "" || id.length > 20) {
         setError(true)
@@ -44,28 +46,31 @@ const Home: React.FC = () => {
     } else {
         setDisabled(true)
         if (!disabled) {
-            let msg = await checkTime(id)
+            const msg = await checkTime(id)
             
             if (!msg.response) {
                 setAlert(true)
                 setError(true)
                 setTitle(msg.message)
                 setLoading(false)
+                setId("")
             } else {
+                const data = format(msg.message);
                 setTitle("Registrado correctamente")
                 setAlert(true)
-                setBodymsg(msg.message)
+                setBodymsg(data)
                 setLoading(false)
+                setId("")
+                setTimer(10000)
             }
         }
         setTimeout(() => {
             setDisabled(false) //prevents user spamming ids with timer
             setLoading(false)
-            setId("")
         }, 1000);
         setTimeout(() => {
             setAlert(false)
-        }, 10000);
+        }, timer);
     }
   }
 
@@ -106,17 +111,12 @@ const Home: React.FC = () => {
             Checar
           </Button>
         </Container>
-        <Transition mounted={alert} transition="scale-y" duration={100} timingFunction="ease">
-          {(styles)=>(
             <Alert
-              styles={styles}
               visible={alert}
               error={error}
               title={title}
               bodymsg={bodymsg}
             />
-          )}
-        </Transition>
       </Container>
     </Container>
   );

@@ -11,14 +11,13 @@ export const checkTime = async (id : string) : Promise<Message> => {
     try {
         let isOnline = await online()
         if (isOnline) {
-
             const values = {
                 idGuia: id,
                 mac: systemInfo.mac,
                 username: systemInfo.username,
                 hostname: systemInfo.hostname
             }
-            console.log(values);
+            //console.log(values);
             
            const response = await fetch(`http://localhost:8080/guides/checkTime`, {
                    method: "post",

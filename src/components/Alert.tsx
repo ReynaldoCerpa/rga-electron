@@ -1,31 +1,36 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import { Alert as Alrt } from '@mantine/core';
 import { FaTimesCircle, FaCheckCircle } from "react-icons/fa";
 
-const Alert = ({visible, error, title, bodymsg, styles} : props) => {
+const Alert = ({visible, error, title, bodymsg} : props) => {
 
   return (
       <>
         { visible ?
             <Alrt
-                style={styles}
                 icon={error ? <FaTimesCircle size={16} /> : <FaCheckCircle size={16} />}
                 color={error ? "red" : "green"}
                 title={title}
-            >{bodymsg}</Alrt>
+            >{ bodymsg.length > 0 ?
+            <>
+              <h1><b>Nombre:</b> {bodymsg[0]}</h1>
+              <h1><b>ID:</b> {bodymsg[1]}</h1>
+              <h1><b>Marcó:</b> {bodymsg[2]}</h1>
+              <h1><b>Horas:</b> {bodymsg[3]}</h1>
+            </>
+            : null
+            }</Alrt>
             : null
         }
       </>
   )
 }
 
-
 interface props {
     visible: boolean;
     error: boolean;
     title: string;
-    bodymsg: string;
-    styles: CSSProperties
+    bodymsg: string[];
 }
 
 export default Alert
