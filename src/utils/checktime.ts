@@ -15,7 +15,8 @@ export const checkTime = async (id : string) : Promise<Message> => {
                 idGuia: id,
                 mac: systemInfo.mac,
                 username: systemInfo.username,
-                hostname: systemInfo.hostname
+                hostname: systemInfo.hostname,
+                networkInterface: systemInfo.networkInterface
             }
             //console.log(values);
             
