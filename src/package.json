@@ -1,7 +1,7 @@
 {
   "name": "registro-guias",
   "productName": "Registro guías",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Electron React App built for caracol science museum to check tour guides check-ins and outs",
   "main": "./main.prod.js",
   "author": {
