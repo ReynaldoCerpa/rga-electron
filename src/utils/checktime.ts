@@ -20,7 +20,7 @@ export const checkTime = async (id : string) : Promise<Message> => {
             }
             //console.log(values);
             
-           const response = await fetch(`http://localhost:8080/guides/checkTime`, {
+           const response = await fetch(`http://192.168.1.78:8080/guides/checkTime`, {
                    method: "post",
                    headers: headers,
                    body: JSON.stringify(values)
